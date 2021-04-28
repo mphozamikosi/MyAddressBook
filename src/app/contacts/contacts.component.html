@@ -1,0 +1,57 @@
+
+
+<div class="row" >
+    <div class="details ui segment col-md-4" style="float: left;">
+        <app-contacts-form></app-contacts-form>
+    </div>
+  
+    <div class="details ui segment col-md-8" style="float: right;">
+        <nav class="navbar">
+          <input class="form-control" type="text" name="firstName" [(ngModel)]="searchText" (ngModelChange)="Search()" placeholder="Enter text to seacrh with First Name, Surname or Tel!">
+        </nav>
+        <i class="fas fa-info-circle ">To edit, just click on any record then edit it on the left hand side.</i>
+        <div class="ui segment attached secondary inverted" style="border: none; background-image:  linear-gradient(135deg, rgb(24,42,115) 0%,rgb(33,138,174) 69%, rgb(32,167,172) 89%); text-align: center;">Contact list</div>
+        <table class="table mt-3" id="contactTable">
+            <thead class="thead-light">
+                <tr>
+                    <th (click)="sort('firstName')"><i class="far fa-user"></i> Name&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('surname')"><i class="far fa-user"></i>Surname&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('tel')"><i class="fas fa-phone"></i> Tel.&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('cel')"><i class="fas fa-phone"></i> Cell.&nbsp;<i class="fa fa-sort"></i></th>
+                    <th (click)="sort('email')"><i class="fas fa-envelope-square"></i> Email Address&nbsp;<i class="fa fa-sort"></i></th>
+                    <th><i class="far fa-calendar-plus"></i> Updated Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pd of service.list | orderBy: key: reverse| paginate:{itemsPerPage:5, currentPage:p};">
+                    <td (click)="populateForm(pd)">{{pd.firstName}}</td>
+                    <td (click)="populateForm(pd)">{{pd.surname}}</td>
+                    <td (click)="populateForm(pd)">{{pd.tel}}</td>
+                    <td (click)="populateForm(pd)">{{pd.cel}}</td>
+                    <td (click)="populateForm(pd)">{{pd.email}}</td>
+                    <td (click)="populateForm(pd)">{{pd.updatedDate}}</td>
+                    <td>
+                        <i (click)="onDelete(pd.id)" class="far fa-trash-alt fa-lg text-danger"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p= $event"></pagination-controls>
+        <div class="csv-file-chooser-section">
+          <hr>
+          <label>Upload CSV(Optional)</label>
+          <br>
+          <input class="btn btn-success m-auto text-center mt-3" type="file" #fileImportInput name="File Upload" id="csvFileUpload" (change)="fileChangeListener($event)"
+            accept=".csv"/>
+        
+          <select hidden aria-placeholder="Parse headers?" [(ngModel)]="header">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+        </div>
+    </div>
+    
+</div>
+
+
+

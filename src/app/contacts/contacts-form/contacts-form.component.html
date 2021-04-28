@@ -1,0 +1,31 @@
+<form novalidate #form="ngForm" (submit)="onSubmit(form)"> 
+    <input type="hidden" name="id" [value]="service.formData.id">
+    <div class="ui segment attached secondary inverted" style="border: none; background-image:  linear-gradient(135deg, rgb(24,42,115) 0%,rgb(33,138,174) 69%, rgb(32,167,172) 89%); text-align: center;"><i class="far fa-plus-square"></i>  Create/Edit Contact</div>
+    <div class="create mt-4">
+        <div class="form-group">
+            <label>FIRST NAME</label>
+            <input required type="text" class="form-control form-control lg" placeholder="First Name" name="firstName" #firstName="ngModel" [(ngModel)]="service.formData.firstName" [class.invalid]="firstName.invalid && firstName.touched">
+        </div>
+        <div class="form-group">
+            <label>SURNAME</label>
+            <input required type="text" class="form-control form-control lg" placeholder="Surname" name="surname" #surname="ngModel" [(ngModel)]="service.formData.surname" [class.invalid]="surname.invalid && surname.touched">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>TEL. NUMBER</label>
+                <input required type="text" class="form-control form-control lg" placeholder="tel" name="tel" #tel="ngModel" [(ngModel)]="service.formData.tel" maxlength="10" minlength="10" [class.invalid]="tel.invalid && tel.touched">
+            </div>
+            <div class="form-group col-md-6">
+                <label>CEL. NUMBER</label>
+                <input required type="text" class="form-control form-control lg" placeholder="cel" name="cel" #cel="ngModel" [(ngModel)]="service.formData.cel" maxlength="10" minlength="10" [class.invalid]="cel.invalid && cel.touched">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>EMAIL</label>
+            <input required type="email" class="form-control form-control lg" placeholder="email" name="email" #email="ngModel" [(ngModel)]="service.formData.email" [class.invalid]="email.invalid && email.touched">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-info btn-lg col-md-12 m-auto" type="submit" (click)="toggleLoading()" [disabled]="form.invalid">SUBMIT</button>
+        </div>
+    </div>
+</form>
